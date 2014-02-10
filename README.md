@@ -2,7 +2,7 @@
 
 SLS files for setting up Halite integration setup. This document describes general steps in running Halite's functional tests.
 
-####Setup:
+####What it does:
 
 Install Halite, Salt Master and Salt Cloud related files.
 
@@ -11,3 +11,12 @@ The top file calls salt-cloud.sls (TODO: should be split into multiple files) wh
 Finally Halite is installed and compiled from source. Any related deps are also installed.
 
 There are more State (sls) files that create with creation and deletion of minions.
+
+####Installation Steps:
+
+* Make sure that your /srv/salt has the start tree provided by this project
+* Run highstate (the top file calls salt-cloud)
+* Run create-minion.sls to create the test minions
+* Run perform-test.sls to do the tests 
+* Run delete-minion.sls to delete the test minion
+* The server can now be deleted by the Jenkin's server
