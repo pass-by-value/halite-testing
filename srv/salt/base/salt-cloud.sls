@@ -107,10 +107,35 @@ salt-pkg:
     - require:
       - pkg: python-pip
 
+nose:
+  pip.installed:
+    - name: nose
+    - require:
+      - pkg: python-pip
+
+webtest:
+  pip.installed:
+    - name: webtest
+    - require:
+      - pkg: python-pip
+
+paste:
+  pip.installed:
+    - name: paste
+    - require:
+      - pkg: python-pip
+
 copy_file:
   file.copy:
     - name: '/etc/init/salt-master.conf'
     - source: '/root/salt/pkg/salt-master.upstart'
+    - user: root
+    - group: root
+
+salt-master:
+  file.managed:
+    - source: salt://master
+    - name: '/etc/salt/master'
     - user: root
     - group: root
 
@@ -120,7 +145,7 @@ start-salt:
     - require:
       - file: '/etc/init/salt-master.conf'
 
-https://github.com/saltstack/halite.git:
+https://github.com/pass-by-value/halite.git:
   git.latest:
     - rev: master
     - target: /root/halite
@@ -140,15 +165,21 @@ install-nvm:
     - require:
       - pkg: curl
 
-#install-node:
-#  cmd.run:
-#    - name: 'nvm install 0.10'
-#    - require:
-#      - nvm
+install-js-halite:
+  cmd.script:
+    - source: salt://install_node_npm.sh
+    - cwd: /root/halite
 
-#install-halite-deps:
-#  cmd.run:
-#    - name: 'npm install .'
-#    - cwd: /root/halite
-#    - require:
-#      - pkg: npm
+ui-tester:
+  user.present:
+    - groups:
+      - sudo
+    - password: {{ pillar.get('halite_password_hash') }}
+
+write-override-file:
+  file.managed:
+    - source: salt://override.conf
+    - name: /root/halite/halite/test/functional/config/override.conf
+    - user: root
+    - group: root
+    - template: jinja
