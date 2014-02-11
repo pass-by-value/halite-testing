@@ -145,7 +145,7 @@ start-salt:
     - require:
       - file: '/etc/init/salt-master.conf'
 
-https://github.com/pass-by-value/halite.git:
+https://github.com/saltstack/halite.git:
   git.latest:
     - rev: master
     - target: /root/halite
