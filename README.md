@@ -14,9 +14,16 @@ There are more State (sls) files that create with creation and deletion of minio
 
 ####Installation Steps:
 
-* Make sure that your /srv/salt has the start tree provided by this project
-* Run highstate (the top file calls salt-cloud)
-* Run create-minion.sls to create the test minions
-* Run perform-test.sls to do the tests 
-* Run delete-minion.sls to delete the test minion
-* The server can now be deleted by the Jenkin's server
+* Make sure that your /srv/salt has the state tree provided by this project
+* Change authentication credentials in the (pillar) [https://github.com/pass-by-value/halite-testing/blob/master/srv/pillar/data.sls] data
+
+####Running:
+* There is only one file that needs to run (run_test.sh) that file will
+  1. Create the master for test
+  1. Install the state tree on the newly created master
+  1. Create minion that connects to the newly created master
+  1. Runs highstate on the newly created master so that Apache is installed on the minion
+  1. Runs tests
+  1. Copies the results to $HOME/jenkins
+  1. Delete minion
+  1. Delete master created for test
