@@ -10,12 +10,12 @@ The top file calls salt-cloud.sls (TODO: should be split into multiple files) wh
 
 Finally Halite is installed and compiled from source. Any related deps are also installed.
 
-There are more State (sls) files that create with creation and deletion of minions.
+There are more State (sls) files that deal with creation and deletion of minions.
 
 ####Installation Steps:
 
 * Make sure that your /srv/salt has the state tree provided by this project
-* Change authentication credentials in the [pillar](https://github.com/pass-by-value/halite-testing/blob/master/srv/pillar/data.sls) data
+* Change authentication credentials as shown by the [example](https://github.com/pass-by-value/halite-testing/blob/master/srv/pillar/data.sls) pillar data
 
 ####Running:
 * There is only one file that needs to run (run_test.sh) that file will
