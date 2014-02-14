@@ -15,7 +15,7 @@ There are more State (sls) files that create with creation and deletion of minio
 ####Installation Steps:
 
 * Make sure that your /srv/salt has the state tree provided by this project
-* Change authentication credentials in the (pillar) [https://github.com/pass-by-value/halite-testing/blob/master/srv/pillar/data.sls] data
+* Change authentication credentials in the (pillar)[https://github.com/pass-by-value/halite-testing/blob/master/srv/pillar/data.sls] data
 
 ####Running:
 * There is only one file that needs to run (run_test.sh) that file will
